@@ -10,27 +10,12 @@
     = link_to "#", class: "main-header__edit-btn" do
       Edit
   .messages
-    .message
-      .message__upper-info
-        %p.message__upper-info__talker
-          aaa
-        %p.message__upper-info__date
-          2020/05/15(Fri) 22:00:00
-      %p.message-text
-        こんばんは！
-    .message
-      .message__upper-info
-        %p.message__upper-info__talker
-          aaa
-        %p.message__upper-info__date
-          2020/05/15(Fri) 22:10:00
-      %p.message-text
-        おやすみなさい！
+    = render @messages
   .form
-    %form.new_message
+    = form_for [@group, @message] do |f|
       .input-box
-        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('far', 'image')
-          %input{type: "file", class: "input-box__image__file"}
-      %input{type: "submit", value: "Send", class: "submit-btn"}
+        = f.text_field :content, class: "input-box__text", placeholder: "type a message"
+        = f.label :image, class: "input-box__image" do
+          = icon('far', 'image', class: "icon")
+          = f.file_field :image, class: "input-box__image__file"
+      = f.submit "Send", class: "submit-btn"
