@@ -5,7 +5,7 @@ $(function() {
       var html = `<div class="message">
                     <div class="message__upper-info">
                       <p class="message__upper-info__talker">
-                        ${message.user.name}
+                        ${message.user_name}
                       </p>
                       <p class="message__upper-info__date">
                         ${message.created_at}
@@ -23,7 +23,7 @@ $(function() {
       var html = `<div class="message">
                     <div class="message__upper-info">
                       <p class="message__upper-info__talker">
-                        ${message.user.name}
+                        ${message.user_name}
                       </p>
                       <p class="message__upper-info__date">
                         ${message.created_at}
@@ -53,7 +53,10 @@ $(function() {
     })
     .done(function(data){
       var html = buildHTML(data);
-      
+      $('.messages').append(html);
+      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+      $('form')[0].reset();
+      $('.submit-btn').removeAttr('disabled');
     })
   });
 
